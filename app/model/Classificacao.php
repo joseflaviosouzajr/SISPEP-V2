@@ -83,7 +83,7 @@ public function setUser($usuario)
 	 
 	public function setPad($pad1)
 	{
-	    $this->pas = $pad1;
+	    $this->pad = $pad1;
 	    return $this;
 	}
 
@@ -105,7 +105,7 @@ public function setUser($usuario)
    
   public function setHas($has1)
   {
-      $this->has1 = $has1;
+      $this->has = $has1;
       return $this;
   }
 

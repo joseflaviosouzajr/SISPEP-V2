@@ -68,10 +68,10 @@ public function cadastrarClassficacaoEnf(){
  $stmt->bindParam(':TEMP',$this->temp);
   $stmt->bindParam(':PAD',$this->pad);
  $stmt->bindParam(':PAS',$this->pas);
- $stmt->bindParam(':SAT',$this->saturacao);
+ $stmt->bindParam(':SAT',$this->sat);
  $stmt->bindParam(':HAS',$this->has);
  $stmt->bindParam(':DIAB',$this->diabetes);
- $stmt->bindParam(':ds_evolucao',$this->ds_evolucao);
+ $stmt->bindParam(':ds_evolucao',$this->evolucao);
  //$stmt->bindParam(':totem',null);
  $stmt->bindParam(':protocolo',$this->protocolo);
   $stmt->bindParam(':cd_paciente',$this->cd_paciente);
@@ -294,18 +294,18 @@ public function buscarprontenf()
 public function editclassificacaoenf(){
 
  $con = Conexao::getInstance();
- $query = "update classificacao set temperatura = :TEMP   ,  , pad=:PAD ,  pas = :PAS sat=:SAT , has= :HAS ,  diabetes= :DIAB
-  ,ds_evolucao =:evo ,   , protocolo= :protocolo , DT_REGISTRO =  NOW()   classificacao = :CLARISCO where cd_atendimento = :atendimento "  ;
+ $query = "update classificacao set temp = :TEMP   ,   pad=:PAD ,  pas = :PAS  , sat=:SAT , has= :HAS ,  diabetes= :DIAB
+  ,ds_evolucao =:evo ,   dt_registro =  NOW() , protocolo= :protocolo ,    classificacao = :CLARISCO where cd_atendimento = :atendimento "  ;
 
  $stmt=$con->prepare( $query);
   $stmt->bindParam(':atendimento',$this->atendimento);
  $stmt->bindParam(':TEMP',$this->temp);
- $stmt->bindParam(':PAS',$this->pas);
  $stmt->bindParam(':PAD',$this->pad);
- $stmt->bindParam(':SAT',$this->saturacao);
+ $stmt->bindParam(':PAS',$this->pas);
+ $stmt->bindParam(':SAT',$this->sat);
  $stmt->bindParam(':HAS',$this->has);
  $stmt->bindParam(':DIAB',$this->diabetes);
- $stmt->bindParam(':evo',$this->historiaclinica);
+ $stmt->bindParam(':evo',$this->evolucao);
  $stmt->bindParam(':protocolo',$this->protocolo);
  $stmt->bindParam(':CLARISCO',$this->classificacao);
  $result=$stmt->execute();
