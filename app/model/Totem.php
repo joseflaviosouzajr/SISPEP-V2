@@ -10,10 +10,10 @@ class Totem
 
 
     public $totem;
-    public $prioridade;
-    public $data;
+    public $ds_prioridade;
+    public $dt_registro;
     public $chamado;
-    public $ativo;
+    public $excluido;
 
 
     public function setTotem($totem)
@@ -59,11 +59,11 @@ class Totem
 
 
 
-  public function setData($data)
+  public function setDataRegistro($data)
 
   {
 
-      $this->totem = $data;
+      $this->dt_registro= $data;
 
       return $this;
 
@@ -71,29 +71,15 @@ class Totem
   }
 
 
-  public function getData()
+  public function getDataRegistro()
   {
-      return $this->$data;
+      return $this->$dt_registro;
 
 
 
   }
 
-
-
-  public function getAtivo()
-  {
-    return $this->ativo;
-}
-
-public function setAtivo($ativo)
-{
-    $this->ativo = $ativo;
-    return $this;
-}
-
-
-public function getChamado()
+  public function getChamado()
 {
     return $this->chamado;
 }
@@ -103,6 +89,22 @@ public function setChamado($chamado)
     $this->chamado = $chamado;
     return $this;
 }
+
+
+
+  public function getExcluido()
+  {
+    return $this->excluido;
+}
+
+public function setxcluido($excluido)
+{
+    $this->ativo = $excluido;
+    return $this;
+}
+
+
+
 
 
 

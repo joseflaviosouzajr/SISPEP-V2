@@ -2,8 +2,8 @@
 
 
  include "../../class/conexao.php";
- include "../../model/DocEnf.php";  
- include "../../controler/cDocEnf.php"; 
+ include "../../model/Classificacao.php";  
+ include "../../controler/cClassificacao.php"; 
  
 
  //$prioridade2=$_GET['prioridade'];

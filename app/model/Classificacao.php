@@ -21,6 +21,10 @@
   	 public $dt_regitro;
   	 public $excluido;
   	 public $protocolo;
+     public $cd_paciente;
+     public $classificao;
+     public $totem;
+
   	 
 
    
@@ -90,7 +94,7 @@ public function setUser($usuario)
 	 
 	public function setSat($sat1)
 	{
-	    $this->sat = $sagt1;
+	    $this->sat = $sat1;
 	    return $this;
 	}
 
@@ -175,6 +179,45 @@ public function setProtocolo($prot)
     $this->protocolo = $prot;
     return $this;
 }
+
+
+public function getPaciente()
+{
+    return $this->cd_paciente;
+}
+ 
+public function setPaciente($pac)
+{
+    $this->cd_paciente = $pac;
+    return $this;
+}
+
+
+public function getClassificacao()
+{
+    return $this->classificacao;
+}
+ 
+public function setClassificacao($cla)
+{
+    $this->classificacao = $cla;
+    return $this;
+}
+
+  public function getTotem()
+{
+    return $this->totem;
+}
+ 
+public function setTotem($tot)
+{
+    $this->totem = $tot;
+    return $this;
+}
+
+ 
+
+
 
 
   }

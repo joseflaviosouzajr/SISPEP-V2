@@ -9,7 +9,7 @@ class ControlerCarteira extends Carteira
 	 public function localizarCarteira(){
 
      $con = Conexao::getInstance();
-     $query= "  SELECT  id_paciente_fk
+     $query= "  SELECT  cd_paciente
 
                                FROM  carteira  where nr_carteira = :carteira
    
@@ -23,8 +23,8 @@ class ControlerCarteira extends Carteira
      if ($result) {
 
        $reg=$stmt->fetch(PDO::FETCH_OBJ);
-       if (isset($reg->id_paciente_fk)) {
-           return $reg->id_paciente_fk;
+       if (isset($reg->cd_paciente)) {
+           return $reg->cd_paciente;
        } else {
            return 0;
        }

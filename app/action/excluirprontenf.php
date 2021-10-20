@@ -1,8 +1,8 @@
 <?php 
 
 include '../class/conexao.php';
-include "../model/DocEnf.php"; 
-include "../controler/cDocEnf.php";  
+include "../model/classificacao.php"; 
+include "../controler/cClassificacao.php";  
 
 
 $excluirdocenf = new ControlerDocEnf();

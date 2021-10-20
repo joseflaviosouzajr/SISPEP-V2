@@ -14,7 +14,7 @@
           public static function getInstance() {
               if (!isset(self::$instance)) {
                  self::$instance = new PDO('mysql:host=localhost;
-                  dbname=sispev2',
+                  dbname=sispepv1',
                   'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND
                   => "SET NAMES utf8"));
                   self::$instance->setAttribute(PDO::ATTR_ERRMODE,
@@ -24,6 +24,7 @@
               }
   
               return self::$instance;
+             
           }
   
       }

@@ -7,11 +7,12 @@ class ControlerLab extends lab
 {
 
  public function inserirPedidoLab() {
-
+     $cd_usuario = $_SESSION['cd_usuario'];
      $con = Conexao::getInstance();
-     $inserirpedlab = 'insert into lab_pedido_laudo (atd_pedido, coletado,  dh_coleta)  values (:atd_pedido , :coletado , NULL)';
-     $stmt=$con->prepare($inserirpedlab);
-     $stmt->bindParam(':atd_pedido', $this->atd_pedido);
+     $query = 'insert into lab (cd_atendimento, cd_usuario ,  coletado,  dt_coleta)  values (:atd_pedido , :cd_usuario , :coletado , NULL)';
+     $stmt=$con->prepare($query);
+     $stmt->bindParam(':atd_pedido', $this->cd_atendimento);
+     $stmt->bindParam(':cd_usuario', $cd_usuario);
      $stmt->bindParam(':coletado', $this->coletado);
 
       // var_dump($stmt);

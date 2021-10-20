@@ -109,7 +109,7 @@ $listaesperaenf = new ControlerTotem();
     }
 
 
-  })
+  });
 
 
   } else if (

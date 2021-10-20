@@ -33,7 +33,35 @@ if (isset($nr_carteira)) {
     $existecarteira = $carteirapct->localizarCarteira();
 
     if ($existecarteira!=0) {
-    	// code...
+    	  $documento->setPaciente($existecarteira);
+     $resposta= $documento->getProntuarioPaciente();
+   
+     if ($resposta==1) {
+     	
+     	$dadospaciente=$documento->getDadosPaciente();
+     	
+     } else {
+
+
+     	
+           echo '<script>
+
+                if(window.confirm("ESSE POSSUI UM PRONTUARIO ATIVO")){
+
+                 
+
+                 } else {
+
+                    
+
+                 }
+
+
+
+                </script>';
+     }
+     
+
 
     } else {
     	
@@ -99,7 +127,7 @@ if (isset($atd)) {
 
 
 		<form action="../../action/cad_pront_enf.php" method="post" style="margin-top: 20px;"> 
-         <input type="hidden" name="atendimento" <?php if($prontuariopaciente){ echo "value='".$prontuariopaciente->atendimento."' "; } ?> >
+         <input type="hidden" name="atendimento" <?php if($prontuariopaciente){ echo "value='".$prontuariopaciente->cd_atendimento."' "; } ?> >
 			<div class="form-group">
 				<strong > DADOS DO PACIENTE  </strong> 
 			</div>
@@ -107,11 +135,11 @@ if (isset($atd)) {
 			<div class="form-group">
 				<label > <strong> CARTEIRA </strong>  </label>
 
-				<input <?php if($dadospaciente){ echo "value='".$carteira."' "; } else if ($prontuariopaciente) 
+				<input <?php if($dadospaciente){ echo "value='".$nr_carteira."' "; } else if ($prontuariopaciente) 
 				{ echo "value='".$prontuariopaciente->nr_carteira."' disabled "; } ?> type="text" class="form-control"  name="nr_carteira" id="nr_carteira" > 
 
 
-				<input <?php if($dadospaciente){ echo "value='".$dadospaciente->id_paciente."' "; } else if ($prontuariopaciente) { echo "value='".$prontuariopaciente->cd_paciente."' "; }?> type="hidden" class="form-control"  name="cd_paciente"> 
+				<input <?php if($dadospaciente){ echo "value='".$dadospaciente->cd_paciente."' "; } else if ($prontuariopaciente) { echo "value='".$prontuariopaciente->cd_paciente."' "; }?> type="hidden" class="form-control"  name="cd_paciente"> 
 				<span class="input-group-text"<?php if (!$dadospaciente) { echo 'id="pesquisar"'; } ?> > <i class="fas fa-search"></i> </span>
 
 			</div>
@@ -132,7 +160,7 @@ if (isset($atd)) {
 
 			<div class="form-group">
 				<label >TEMPERATURA</label>
-				<input <?php if($prontuariopaciente){ echo "value='".$prontuariopaciente->temperatura."'"; } ?> 
+				<input <?php if($prontuariopaciente){ echo "value='".$prontuariopaciente->temp."'"; } ?> 
 				 type="text" class="form-control" name="TEMP"  placeholder="Digite a Temperatura"  required=""  autocomplete="off"  >
 			</div>
 
@@ -167,9 +195,9 @@ if (isset($atd)) {
 			</div>
 
 			<div class="form-group">
-				<label >HISTORIA CLINICA</label>
-				<textarea  class="form-control"  name="HC" placeholder="Digite a Historia Clinica do paciente"  autocomplete="off"  required="">
-					<?php if($prontuariopaciente){ echo $prontuariopaciente->hits_clinica; } ?>
+				<label >EVOLUCAO</label>
+				<textarea  class="form-control"  name="evolucao" placeholder="Digite a Evolucao do paciente"  autocomplete="off"  required="">
+					<?php if($prontuariopaciente){ echo $prontuariopaciente->ds_evolucao; } ?>
 				</textarea>  
 			</div>
 

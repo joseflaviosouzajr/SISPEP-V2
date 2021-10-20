@@ -2,28 +2,50 @@
 
 class Lab
 {
- 
-    public $id_classificacao;
+    public $cd_lab;
+    public $cd_atendimento;
+    public $cd_usuario;
     public $coletado;
     public $resultado;
-    public $valor_ref;
+    public $valor;
     public $data_coleta;
     public $data_resultado;
     public $obs;
-    public $cd_usuario;
+   
 
 
-public function getIdClassificacao()
+public function getLab()
 {
-    return $this->id_classificacao;
+    return $this->cd_lab;
 }
  
-public function setIdClassificacao($classificacao)
+public function setLab($lab)
 {
-    $this->id_classificacao = $classificacao;
+    $this->cd_lab = $lab;
+    return $this;
+}
+
+public function getAtendimento()
+{
+    return $this->cd_atendimento;
+}
+ 
+public function setAtendimento($atd)
+{
+    $this->cd_atendimento = $atd;
     return $this;
 }
  
+public function getUser()
+{
+    return $this->cd_usuario;
+}
+ 
+public function setUser($user)
+{
+    $this->$cd_usuario = $user;
+    return $this;
+}
 
  public function getColetado()
  {
@@ -50,34 +72,34 @@ public function setResultado($res)
 
 public function getValorRef()
 {
-    return $this->valor_ref;
+    return $this->valor;
 }
  
 public function setValorRef($vlref)
 {
-    $this->valor_ref = $vl_ref;
+    $this->valor = $vlref;
     return $this;
 }
 
 public function getDataColetac()
 {
-    return $this->data_coleta;
+    return $this->dt_coleta;
 }
  
 public function setDataColeta($dtcoleta)
 {
-    $this->$data_coleta = $dtcoleta;
+    $this->$dt_coleta = $dtcoleta;
     return $this;
 }
 
 public function getDataRes()
 {
-    return $this->data_resultado;
+    return $this->dt_resultado;
 }
  
 public function setDataRes($dtres)
 {
-    $this->$data_resultado = $dtres;
+    $this->$dt_resultado = $dtres;
     return $this;
 }
 
@@ -94,16 +116,7 @@ public function setObs($obs_lab)
 }
 
 
-public function getUser()
-{
-    return $this->cd_usuario;
-}
- 
-public function setUser($user)
-{
-    $this->$cd_usuario = $user;
-    return $this;
-}
+
 
 
 }

@@ -8,7 +8,11 @@ $totem = new ControlerTotem();
 
 $nr_senha = $_POST['nr_senha'];
 
+
+
+
 $totem->setTotem($nr_senha);
+
 
 $totem->senhaChamada();
 

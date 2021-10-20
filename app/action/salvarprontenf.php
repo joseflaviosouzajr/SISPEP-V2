@@ -1,8 +1,8 @@
 <?php 
-
+session_start();
 include '../class/conexao.php';
-include "../model/DocEnf.php"; 
-include "../controler/cDocEnf.php";  
+include "../model/classificacao.php"; 
+include "../controler/cClassificacao.php";  
 include "../model/Lab.php"; 
 include "../controler/cLab.php";  
 
@@ -15,9 +15,9 @@ $salvardocenf->setAtendimento($atd);
 $salvardocenf->salvardocenf();
 
 
-$lab->setAtdPedidoLab($atd);
+$lab->setAtendimento($atd);
 
-$lab->setColetadoPedidoLab('N');
+$lab->setColetado('N');
 
 $lab->inserirPedidoLab();
 

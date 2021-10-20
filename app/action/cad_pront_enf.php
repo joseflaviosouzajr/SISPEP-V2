@@ -1,8 +1,8 @@
 <?php 
 session_start();
 include "../class/conexao.php";
-include "../model/DocEnf.php";
-include "../controler/cDocEnf.php"; 
+include "../model/classificacao.php";
+include "../controler/cClassificacao.php"; 
 include  "../class/Seguranca.php";
 
 $documento=new ControlerDocEnf();
@@ -15,7 +15,7 @@ $padP=$_POST['PAD'];
 $satP=$_POST['SAT'];
 $hasP= (isset($_POST['HAS'])) ? $_POST['HAS'] : 0 ;
 $diabP=(isset($_POST['DIAB'])) ? $_POST['DIAB'] : 0 ;
-$hist_cliP=$_POST['HC'];
+$evolucaoP=$_POST['evolucao'];
 $clas_riscoP=$_POST['CLARISCO'];
 $protocoloP=null;
 $contsepse=0;
@@ -65,13 +65,12 @@ if ($clas_riscoP != 'AZUL'  &&  $contsepse>=2) {
 
 
 
-$documento->setId_paciente($id_pacienteP);
-$documento->setId_carteira(intval($nr_carteiraP));
+$documento->setPaciente($id_pacienteP);
 $documento->setTemp($tempP);
 $documento->setPas($pasP);
 $documento->setPad($padP);
-$documento->setSaturacao($satP);
-$documento->setHistoriaclinica($hist_cliP);
+$documento->setSat($satP);
+$documento->setEvolucao($evolucaoP);
 $documento->setHas(intval($hasP));
 $documento->setDiabetes(intval($diabP));
 $documento->setClassificacao($clas_riscoP);

@@ -10,13 +10,15 @@ public function retirarSenha($prioridade)
 
 	{
        $con = Conexao::getInstance();
-       $inserir = "insert into totem (prioridade, data ) values (:prioridade , Now())";
-       $stmt=$con->prepare($inserir);
+       $query = "insert into totem (ds_prioridade, dt_registro ) values (:prioridade , Now())";
+       $stmt=$con->prepare($query);
        $stmt->bindParam(':prioridade',$prioridade);
        $result=$stmt->execute();
 
        if ($result) {
+              
        	echo "suscesso";
+
        } else {
        	echo "erro";
        }
@@ -31,19 +33,19 @@ public function ultimaSenha(){
 
 
           $con = Conexao::getInstance();
-       $listarultimo = "select * from totem where totem in ( select max(totem) from totem )";
+       $listarultimo = "select * from totem where cd_totem in ( select max(cd_totem) from totem )";
        $stmt=$con->prepare($listarultimo);
              $result=$stmt->execute();
 
            if ($result) {
        $reg=$stmt->fetch(PDO::FETCH_OBJ);
-       echo '<h1>Senha: </h1><h2>'.$reg->totem.'</h2>';
+       echo '<h1>Senha: </h1><h2>'.$reg->cd_totem.'</h2>';
        if ($reg->prioridade == 'P') {
        	echo '<h4> PRIORIDADE </h4>';
        } else {
        	echo '<h4> NORMAL </h4>';
        }
-        echo '<h1>data/hora: </h1><h2>'.$reg->data.'</h2>';
+        echo '<h1>data/hora: </h1><h2>'.$reg->dt_registro.'</h2>';
        
        } else {
        	echo "erro";
@@ -56,12 +58,12 @@ public function ultimaSenha(){
      
 
        $con = Conexao::getInstance();
-       $listarsenhas = "select totem , case when prioridade = 'P' then 'PRIORIDADE' ELSE 'NORMAL'  end prioridade  ,   
+       $query= "select cd_totem , case when ds_prioridade = 'P' then 'PRIORIDADE' ELSE 'NORMAL'  end prioridade  ,   
 
-       case when prioridade = 'P' then '1' ELSE '2'  end prioridadelista  ,
-        data 
-       from totem where chamado = 'N'  and ativo = 'S' order by prioridadelista  ";
-       $stmt=$con->prepare($listarsenhas);
+       case when ds_prioridade = 'P' then '1' ELSE '2'  end prioridadelista  ,
+        dt_registro 
+       from totem where chamado = 'N'  and excluido = 'N' order by prioridadelista  ";
+       $stmt=$con->prepare($query);
              $result=$stmt->execute();
 
            if ($result) {
@@ -70,10 +72,10 @@ public function ultimaSenha(){
            
            
            echo "<tr>"; 
-           echo "<td class='text-center'> Nr: ".$reg->totem." - ".$reg->prioridade."</td>";
-           echo "<td class='text-center'> ".$reg->data."</td>";
-           echo "<td class='text-center'><i data-nrprioridade='".$reg->totem."' data-priority='".$reg->totem." - ".$reg->prioridade."' data-prioridade='".$reg->prioridade."' class='fas fa-volume-up'></i></td>";
-           echo "<td class='text-center' > <a href='action/excluirsenha.php?senha=".$reg->totem."'> <i class='fas fa-trash'></i> </a> </td>";
+           echo "<td class='text-center'> Nr: ".$reg->cd_totem." - ".$reg->prioridade."</td>";
+           echo "<td class='text-center'> ".$reg->dt_registro."</td>";
+           echo "<td class='text-center'><i data-nrprioridade='".$reg->cd_totem."' data-priority='".$reg->cd_totem." - ".$reg->prioridade."' data-prioridade='".$reg->prioridade."' class='fas fa-volume-up'></i></td>";
+           echo "<td class='text-center' > <a href='action/excluirsenha.php?senha=".$reg->cd_totem."'> <i class='fas fa-trash'></i> </a> </td>";
             echo "</tr>";
 
 
@@ -91,8 +93,8 @@ public function ultimaSenha(){
  public function excluirSenha(){
 
        $con = Conexao::getInstance();
-       $deletar = "delete from totem where totem  = :totem";
-       $stmt=$con->prepare( $deletar);
+       $query = "delete from totem where cd_totem  = :totem";
+       $stmt=$con->prepare($query);
        $stmt->bindParam(':totem',$this->totem);
        $result=$stmt->execute();
 
@@ -109,9 +111,9 @@ public function ultimaSenha(){
 
   
        $con = Conexao::getInstance();
-       $alterarchamado = "update  totem set chamado = 'S'  where totem  = :totem";
-       $stmt=$con->prepare( $alterarchamado);
-       $stmt->bindParam(':totem',$this->totem);
+       $query = "update  totem set chamado = 'S'  where cd_totem  = :totem";
+       $stmt=$con->prepare( $query);
+       $stmt->bindParam(':totem',$this->cd_totem);
        $result=$stmt->execute();
 
        if ($result) {
@@ -121,7 +123,6 @@ public function ultimaSenha(){
        }
 
  }
-
 
  
 
