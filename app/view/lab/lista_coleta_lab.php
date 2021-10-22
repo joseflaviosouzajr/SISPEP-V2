@@ -85,6 +85,21 @@ $atdlistalab = new  ControlerDocEnf();
               </select>
             </div>
 
+            <div class="input-group mb-3">
+              
+              <label class="input-group" for="valor">Valor de Referencia:</label>
+              <input class="form-control"  type="text" name="vlrf" id='valor'>
+              
+            </div>
+
+
+            <div class="input-group mb-3">
+              
+              <label class="input-group" for="obs">Observacao:</label>
+                <textarea class="form-control" name='obs' id='obs'> </textarea>
+              
+            </div>
+
             <div>    
               <button type="submit" class="btn btn-success">Salvar Resultado</button> 
             </div>
@@ -120,6 +135,7 @@ $atdlistalab = new  ControlerDocEnf();
       data:$(this).serialize(),
       success:function(data){
         window.location.href='lista_coleta_lab.php';
+       
       }
     });
 

@@ -2,13 +2,13 @@
 
 
 include "../../class/conexao.php";
-include "../../model/DocEnf.php";  
-include "../../controler/cDocEnf.php"; 
+include "../../model/FichaMed.php";  
+include "../../controler/cFichaMed.php"; 
 
 
 
 
-$listaesperamed = new ControlerDocEnf();
+$listaesperamed = new ControlerFichaMed();
 
 ?>
 

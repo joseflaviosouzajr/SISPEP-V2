@@ -1,4 +1,7 @@
 <?php 
+
+
+session_start();
 include "../class/conexao.php";
 include "../model/Lab.php";
  include "../controler/cLab.php";
@@ -7,9 +10,9 @@ $coletarpedido  = new ControlerLab();
 
 $atd=$_GET['cdAtendimento'];
 
-$coletarpedido->setAtdPedidoLab($atd);
+$coletarpedido->setAtendimento($atd);
  //$coletarpedido->getAtdPedidoLab();
- $coletarpedido->setColetadoPedidoLab('S');
+ $coletarpedido->setColetado('S');
 
  $coletarpedido->updateResPedidoLab();
 

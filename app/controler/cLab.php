@@ -31,10 +31,12 @@ class ControlerLab extends lab
 public function resultadoPedidoLab(){
 
  $con = Conexao::getInstance();
- $reslaudo = 'update lab_pedido_laudo set resultado = :resultado  , dh_resultado = NOW() where atd_pedido = :atd_pedido' ;
- $stmt=$con->prepare($reslaudo);
+ $query = 'update lab set resultado = :resultado  , valor= :valor ,  dt_resultado = NOW() , obs = :obs  where cd_atendimento = :atd_pedido' ;
+ $stmt=$con->prepare($query);
  $stmt->bindParam(':resultado',$this->resultado);
- $stmt->bindParam(':atd_pedido', intval($this->atd_pedido));
+ $stmt->bindParam(':atd_pedido', intval($this->cd_atendimento));
+ $stmt->bindParam(':valor',$this->valor);
+ $stmt->bindParam(':obs',$this->obs);
  $result=$stmt->execute();
 
 
@@ -51,13 +53,15 @@ public function resultadoPedidoLab(){
 
 
 public function updateResPedidoLab()  {
-
+ $usuario=$_SESSION['cd_usuario'];
  $con = Conexao::getInstance();
- $reslaudo = 'update lab_pedido_laudo set  dh_coleta = now() , coletado = :coletado  where atd_pedido = :atd_pedido' ;
- $stmt=$con->prepare($reslaudo);
- $stmt->bindParam(':atd_pedido',  intval($this->atd_pedido) );
+ $query = 'update lab set  dt_coleta = now() , coletado = :coletado , cd_usuario = :cd_usuario  where cd_atendimento = :atd_pedido' ;
+ $stmt=$con->prepare($query);
+
+ $stmt->bindParam(':atd_pedido',  intval($this->cd_atendimento) );
+   $stmt->bindParam(':cd_usuario', $usuario);
   $stmt->bindParam(':coletado', $this->coletado);
- $result=$stmt->execute();
+  $result=$stmt->execute();
 
 
  if ($result) {

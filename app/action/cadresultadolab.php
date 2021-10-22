@@ -8,10 +8,16 @@ $lab=new ControlerLab();
 
 $resultadolab= $_POST['resultado'];
 $atd=$_POST['atd'];
+$observacao=$_POST['obs'];
+$valor_ref=$_POST['vlrf'];
 
-$lab->setResulatdoPedidoLab($resultadolab);
 
-$lab->setAtdPedidoLab($atd);
+
+$lab->setResultado($resultadolab);
+
+$lab->setAtendimento($atd);
+$lab->setObs($observacao);
+$lab->setValorRef($valor_ref);
 
 $lab->resultadoPedidoLab();
 ?>

@@ -1,14 +1,15 @@
 <?php 
 include "../../class/conexao.php";
-include "../../model/DocEnf.php";
-include "../../controler/cDocEnf.php";  
+include "../../model/FichaMed.php";
+include "../../controler/cFichaMed.php";  
 
-$documento=new ControlerDocEnf();
+$documento=new ControlerFichaMed();
 
 $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 
  if($atd){
-  $dadoatd = $documento->dadoatdmed($atd);
+  $dadoatd = $documento->dadoatdmed(intval($atd));
+    
 }
 
 ?>
@@ -40,8 +41,13 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
            if($atd){
 
              echo "<h6>Nome: ".$dadoatd->nome."</h6> ";
-             echo "<h6>Atendimento: ".$dadoatd->atendimento."</h6> ";
+             echo "<h6>Atendimento: ".$dadoatd->cd_atendimento."</h6> ";
              echo "<h6>Data de Nascimento: ".$dadoatd->dt_nascimento."</h6> ";
+
+             if($dadoatd->protocolo) {
+               echo "<h6>Protocolo: ".$dadoatd->protocolo."</h6> ";
+             }
+
 
            }
          
@@ -49,12 +55,6 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 </div>
          
 		<h4>FICHA DE EVOLUCAO MEDICA DA URGENCIA </h4>
-
-
-
-
-
-
 
 
 		<form id="prontmed" method="post" style="margin-top: 20px;"> 
@@ -73,11 +73,6 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 				</textarea>  
 			</div>
 
-
-
-
-
-
 			<div class="form-group">
 
 				<label >MOTIVO DA ALTA</label>
@@ -91,11 +86,16 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
             
 			</div>
 
-   
-
-
-	
-
+    <?php if($dadoatd->protocolo){  ?>
+     <div class="form-group">
+            	<label >ACEITE PROTOCOLO</label>
+				<select class="form-control"  required=""   name="aceite_protocolo"    >
+					<option value=''>Selecione a Resposta</option>
+					<option   value="1">SIM</option>
+					<option value="0">NAO</option>
+								</select>
+		</div>
+   <?php  }?>
 
 			<div style="text-align: right;">
 				<button type="submit" class="btn btn-success">Cadastrar</button>
@@ -114,7 +114,18 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <?php  if ($dadoatd->protocolo) { ?> 
 
+   
+   <script type="text/javascript">
+    var protocolo= "<?php echo $dadoatd->protocolo; ?>";
+    alert("Esse Paciente Possui Protocolo de " + protocolo + "!");
+    
+	 </script>
+
+
+  
+  <?php } ?>
 	<script type="text/javascript">
 
   $('#prontmed').submit(function(e){
