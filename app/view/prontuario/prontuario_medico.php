@@ -4,8 +4,16 @@ include "../../model/FichaMed.php";
 include "../../controler/cFichaMed.php";  
 
 $documento=new ControlerFichaMed();
+$ficha= (isset($_GET['cd_ficha']))?$_GET['cd_ficha']:null ;
+if ($ficha) {
+	$atd= (isset($_GET['atd']))?$_GET['atd']:null ;
+  $infoficha=$documento->dadosfichamed($atd,$ficha);
+  var_dump($infoficha);
+} else {
+	$atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 
-$atd= (isset($_POST['atd']))?$_POST['atd']:null ;
+}
+
 
  if($atd){
   $dadoatd = $documento->dadoatdmed(intval($atd));
@@ -59,17 +67,22 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 
 		<form id="prontmed" method="post" style="margin-top: 20px;"> 
          <input type="hidden" name="atendimento" <?php echo "value='".$atd."'"; ?> >
+           <input type="hidden" name="ficha" <?php echo "value='".$infoficha->cd_ficha."'"; ?> >
 			<div class="form-group">
 				<label >QUEIXA PRINCIPAL</label>
 				<textarea  class="form-control"  name="queixa_med" placeholder="Digite a queixa principal do paciente"  autocomplete="off"  required="">
-					
+				<?php if ($ficha) {
+					echo $infoficha->ds_queixa;
+				} ?>	
 				</textarea>  
 			</div>
 
 			<div class="form-group">
 				<label >CONDUTA</label>
 				<textarea  class="form-control"  name="conduta_med" placeholder="Digite a conduta medica"  autocomplete="off"  required="">
-					
+					<?php if ($ficha) {
+					echo $infoficha->ds_conduta;
+				} ?>	
 				</textarea>  
 			</div>
 
@@ -78,10 +91,10 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 				<label >MOTIVO DA ALTA</label>
 				<select class="form-control"  required=""   name="motivo_alta"  placeholder="Escolha o Motivo da Alta"  >
 					<option value=''>Selecione  o Motivo da Alta</option>
-					<option   value="1">Melhorada</option>
-					<option value="2">Internacao Hospitalar</option>
-					<option value="3">Obito</option>
-					<option value="4">Evasao</option>
+					<option  <?php   if($ficha) {  if($infoficha->motivo_alta==1){ echo "selected='selected'"; } } ?> value="1">Melhorada</option>
+					<option <?php   if($ficha) {  if($infoficha->motivo_alta==2){ echo "selected='selected'"; } } ?> value="2">Internacao Hospitalar</option>
+					<option <?php   if($ficha) {  if($infoficha->motivo_alta==3){ echo "selected='selected'"; } } ?> value="3">Obito</option>
+					<option<?php   if($ficha) {  if($infoficha->motivo_alta==4){ echo "selected='selected'"; } } ?> value="4">Evasao</option>
 				</select>
             
 			</div>
@@ -90,9 +103,9 @@ $atd= (isset($_POST['atd']))?$_POST['atd']:null ;
      <div class="form-group">
             	<label >ACEITE PROTOCOLO</label>
 				<select class="form-control"  required=""   name="aceite_protocolo"    >
-					<option value=''>Selecione a Resposta</option>
-					<option   value="1">SIM</option>
-					<option value="0">NAO</option>
+					<option  value=''>Selecione a Resposta</option>
+					<option   <?php   if($ficha) {  if($infoficha->aceite_protocolo==1){ echo "selected='selected'"; } } ?> value="1">SIM</option>
+					<option <?php   if($ficha) {  if($infoficha->aceite_protocolo==0){ echo "selected='selected'"; } } ?>value="0">NAO</option>
 								</select>
 		</div>
    <?php  }?>

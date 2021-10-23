@@ -2,6 +2,7 @@
 
   class FichaMed {
 
+  public $fichaMed;
   public $conduta;
   public $atendimento;
   public $queixa;
@@ -12,6 +13,18 @@
   public $aceite_prot;
 
 
+
+public function getFicha()
+{
+    return $this->$fichaMed;
+}
+ 
+public function setFicha($fichaP)
+
+{
+    $this->$fichaMed = $fichaP;
+    return $this;
+}
 
 
 public function getConduta()
