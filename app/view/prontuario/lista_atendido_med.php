@@ -136,15 +136,15 @@ swalWithBootstrapButtons.fire({
 });
 
  </script>
-<!--  <script >	
+ <script >	
 
-   $(document).ready(function() {
+   $('.fa-pen').click(function(e) {
+    var url = $(this).data('pag');
+    console.log(url);
+    $('#conteudo').load(url);
+   });
 
-      $('#modalExemplo').modal('show');
-
-   } );
-
-</script> -->
+</script>
 
 </body>
 </html>

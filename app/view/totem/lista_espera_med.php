@@ -101,7 +101,7 @@ $listaesperamed = new ControlerFichaMed();
     $.ajax({ 
      
      type:'post',
-     url:'../../view/prontuario/prontuario_medico.php',
+     url:'view/prontuario/prontuario_medico.php',
      data:{
       atd:atd
     }  ,

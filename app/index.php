@@ -28,13 +28,13 @@ $prioridade=(isset($_GET['nr_senha']))?$_GET['nr_senha']:null;
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a id='list-classificacao' class="nav-link" href="#">Lista Para Classificacao<span class="sr-only">(Página atual)</span></a>
+            <a id='list-classificacao' data-pag="totem/lista_espera_enf.php" class="nav-link" href="#">Lista Para Classificacao<span class="sr-only">(Página atual)</span></a>
           </li>
           <li class="nav-item">
-            <a id='prontuario-enf' class="nav-link" href="#">Prontuario Enf</a>
+            <a id='prontuario-enf' data-pag="prontuario/prontuario.php" class="nav-link" href="#">Prontuario Enf</a>
           </li>
           <li class="nav-item">
-            <a id='pacientes-classificados' class="nav-link" href="#">Pacientes Classificados</a>
+            <a id='pacientes-classificados' data-pag="prontuario/lista_atendido_enf.php" class="nav-link" href="#">Pacientes Classificados</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -46,11 +46,34 @@ $prioridade=(isset($_GET['nr_senha']))?$_GET['nr_senha']:null;
           </li>
         </ul>
       </div>
+    <?php } elseif($conselho == 'Cremepe') { ?>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a  data-pag="totem/lista_espera_med.php" class="nav-link" href="#">Lista Espera Med<span class="sr-only">(Página atual)</span></a>
+          </li>
+          <!-- <li class="nav-item">
+            <a  data-pag="prontuario/prontuario_medico.php" class="nav-link" href="#">Ficha Médica</a>
+          </li> -->
+          <li class="nav-item">
+            <a  data-pag="prontuario/lista_atendido_med.php" class="nav-link" href="#">Pacientes Atendidos</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user" ></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="action/logout.php">sair</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
     <?php } elseif($conselho == 'colab') { ?>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a id='list-coleta' class="nav-link" href="#">Lista Para Coleta<span class="sr-only">(Página atual)</span></a>
+              <a id='list-coleta' data-pag="lab/lista_coleta_lab.php" class="nav-link" href="#">Lista Para Coleta<span class="sr-only">(Página atual)</span></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,59 +99,30 @@ $prioridade=(isset($_GET['nr_senha']))?$_GET['nr_senha']:null;
 
 <script type="text/javascript">
   $(document).ready(function(){
-
-   $.ajax({
-    type:'GET',
-    <?php if($pagina=='prontenf'){  ?>
-     url:'view/prontuario/prontuario.php',
-   <?php  } elseif ($pagina=='lista_atendido_enf') {?>   
-    url:'view/prontuario/lista_atendido_enf.php',
-    <?php  } elseif ($pagina=='lista_coleta') {?>   
-    url:'view/lab/lista_coleta_lab.php',
-  <?php 
-    } else {  
+    <?php 
       if($conselho == 'Coren') {
-  ?>
-   url:'view/totem/lista_espera_enf.php',
-  <?php } else {?>
-    url:'view/lab/lista_coleta_lab.php',
- <?php }} ?>
- success:function(data){
-   $('#conteudo').html(data);
- }
-});
+        if ($pagina == 'prontenf') {
+           echo "$('#conteudo').load('view/prontuario/prontuario.php')";
+        } elseif ($pagina == 'lista_atendido_enf') {
+            echo "$('#conteudo').load('view/prontuario/lista_atendido_enf.php')";
+        } else {
+           echo "$('#conteudo').load('view/totem/lista_espera_enf.php')";
+        }
+      } elseif($conselho == 'colab') {
+        echo "$('#conteudo').load('view/lab/lista_coleta_lab.php')";
+      } elseif($conselho == 'Cremepe') {
+        echo "$('#conteudo').load('view/totem/lista_espera_med.php')";
+      } else {
+        echo "$('#conteudo').load('')";
+      }
+
+    ?>
  });
-
-  $('#list-classificacao').click(function(){
-    $.ajax({
-      type:'GET',
-      url:'view/totem/lista_espera_enf.php',
-      success:function(data){
-        $('#conteudo').html(data);
-      }
-    });
+  $('.nav-link').click(function(e){
+    var pag = $(this).data('pag');
+    console.log();
+    $('#conteudo').load('view/'+pag);
   });
-
-  $('#prontuario-enf').click(function(){
-    $.ajax({
-      type:'GET',
-      url:'view/prontuario/prontuario.php',
-      success:function(data){
-        $('#conteudo').html(data);
-      }
-    });
-  });
-  
-  $('#pacientes-classificados').click(function(){
-    $.ajax({
-      type:'GET',
-      url:'view/prontuario/lista_atendido_enf.php',
-      success:function(data){
-        $('#conteudo').html(data);
-      }
-    });
-  });
-  
 
 
 </script>

@@ -5,10 +5,10 @@ include "../../controler/cFichaMed.php";
 
 $documento=new ControlerFichaMed();
 $ficha= (isset($_GET['cd_ficha']))?$_GET['cd_ficha']:null ;
+$infoficha=null;
 if ($ficha) {
 	$atd= (isset($_GET['atd']))?$_GET['atd']:null ;
   $infoficha=$documento->dadosfichamed($atd,$ficha);
-  var_dump($infoficha);
 } else {
 	$atd= (isset($_POST['atd']))?$_POST['atd']:null ;
 
@@ -67,7 +67,19 @@ if ($ficha) {
 
 		<form id="prontmed" method="post" style="margin-top: 20px;"> 
          <input type="hidden" name="atendimento" <?php echo "value='".$atd."'"; ?> >
-           <input type="hidden" name="ficha" <?php echo "value='".$infoficha->cd_ficha."'"; ?> >
+           <input type="hidden" name="ficha" <?php if($infoficha)
+           { echo "value='".$infoficha->cd_ficha."'"; } ?> >
+
+               <?php if($dadoatd->protocolo){  ?>
+     <div class="form-group">
+            	<label >ACEITE PROTOCOLO</label>
+				<select class="form-control"  required=""   name="aceite_protocolo"    >
+					<option  value=''>Selecione a Resposta</option>
+					<option   <?php   if($ficha) {  if($infoficha->aceite_protocolo==1){ echo "selected='selected'"; } } ?> value="1">SIM</option>
+					<option <?php   if($ficha) {  if($infoficha->aceite_protocolo==0){ echo "selected='selected'"; } } ?>value="0">NAO</option>
+								</select>
+		</div>
+   <?php  }?>
 			<div class="form-group">
 				<label >QUEIXA PRINCIPAL</label>
 				<textarea  class="form-control"  name="queixa_med" placeholder="Digite a queixa principal do paciente"  autocomplete="off"  required="">
@@ -94,21 +106,12 @@ if ($ficha) {
 					<option  <?php   if($ficha) {  if($infoficha->motivo_alta==1){ echo "selected='selected'"; } } ?> value="1">Melhorada</option>
 					<option <?php   if($ficha) {  if($infoficha->motivo_alta==2){ echo "selected='selected'"; } } ?> value="2">Internacao Hospitalar</option>
 					<option <?php   if($ficha) {  if($infoficha->motivo_alta==3){ echo "selected='selected'"; } } ?> value="3">Obito</option>
-					<option<?php   if($ficha) {  if($infoficha->motivo_alta==4){ echo "selected='selected'"; } } ?> value="4">Evasao</option>
+					<option <?php   if($ficha) {  if($infoficha->motivo_alta==4){ echo "selected='selected'"; } } ?> value="4">Evasao</option>
 				</select>
             
 			</div>
 
-    <?php if($dadoatd->protocolo){  ?>
-     <div class="form-group">
-            	<label >ACEITE PROTOCOLO</label>
-				<select class="form-control"  required=""   name="aceite_protocolo"    >
-					<option  value=''>Selecione a Resposta</option>
-					<option   <?php   if($ficha) {  if($infoficha->aceite_protocolo==1){ echo "selected='selected'"; } } ?> value="1">SIM</option>
-					<option <?php   if($ficha) {  if($infoficha->aceite_protocolo==0){ echo "selected='selected'"; } } ?>value="0">NAO</option>
-								</select>
-		</div>
-   <?php  }?>
+
 
 			<div style="text-align: right;">
 				<button type="submit" class="btn btn-success">Cadastrar</button>
@@ -144,7 +147,7 @@ if ($ficha) {
   $('#prontmed').submit(function(e){
   $.ajax({
   	type:'POST',
-  	url:'../../action/cadprontmed.php',
+  	url:'action/cadprontmed.php',
   	data:$(this).serialize(),
   	success:function(data){
   		console.log(data);
