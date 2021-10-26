@@ -55,7 +55,8 @@ if ($ficha) {
              if($dadoatd->protocolo) {
                echo "<h6>Protocolo: ".$dadoatd->protocolo."</h6> ";
              }
-
+          
+             echo "<a class='btn btn-success' target='_blank' href='view/prontuario/visualizarcla.php?atendimento=".$dadoatd->cd_atendimento."' > Prontuario Enf </a>";
 
            }
          

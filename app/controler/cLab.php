@@ -75,6 +75,52 @@ public function updateResPedidoLab()  {
 
 }
 
+public function listarAtdColeta(){
+
+
+ $con = Conexao::getInstance();
+ $listaratdcoleta = "SELECT distinct l.cd_lab ,l.resultado, c.cd_atendimento , PA.nome , PA.dt_nascimento , l.coletado FROM classificacao c LEFT JOIN lab l on c.cd_atendimento = l.cd_atendimento left JOIN PACIENTE PA ON c.cd_paciente = PA.cd_paciente WHERE PROTOCOLO = 'COVID-19' and finalizado = 'S'";
+ $stmt=$con->prepare($listaratdcoleta);
+ $result=$stmt->execute();
+
+ if ($result) {
+
+     while ($reg=$stmt->fetch(PDO::FETCH_OBJ) ) {
+
+
+         echo "<tr>"; 
+         echo "<td class='text-center'> ATD: ".$reg->cd_atendimento." </td>";
+         echo "<td class='text-center'> ".$reg->nome."</td>";
+         echo "<td class='text-center'>".$reg->dt_nascimento." </td>";
+         
+         if($reg->coletado=='S') { 
+         echo "<td class='text-center'>   <i class='fas fa-vial text-danger'></i></td>"; }
+             else {  echo "<td class='text-center'>  <a href='action/coletarlab.php?cdAtendimento=".$reg->cd_atendimento."' > <i class='fas fa-vial'></i></a></td>"; }
+
+               if($reg->resultado==1 || $reg->resultado==2) { 
+       echo "<td class='text-center' >  <i class='fas fa-microscope text-danger'></i>  </td>";
+     } elseif($reg->coletado=='N') {  
+       echo "<td class='text-center' > <i class='fas fa-microscope'></i> </td>";
+    } else {
+        echo "<td class='text-center' > <a href='#' > <i class='fas fa-microscope modal-resultado' data-atendimento='".$reg->cd_atendimento."'></i> </a> </td>";
+    }
+
+         
+         echo "</tr>";
+
+
+
+
+     }
+
+ } else {
+    echo "erro";
+}
+
+
+}
+
+
 }
 
 

@@ -2,14 +2,14 @@
 
 
 include "../../class/conexao.php";
-include "../../model/Classificacao.php";  
-include "../../controler/cClassificacao.php"; 
+include "../../model/Lab.php";  
+include "../../controler/cLab.php"; 
 
 
  //$prioridade2=$_GET['prioridade'];
 
 
-$atdlistalab = new  ControlerDocEnf();
+$atdlistalab = new  ControlerLab();
 //$cadastrar->retirarSenha($prioridade2);
 //$cadastrar->ultimaSenha();
  //echo $prioridade2;
