@@ -40,7 +40,7 @@ public function ultimaSenha(){
            if ($result) {
        $reg=$stmt->fetch(PDO::FETCH_OBJ);
        echo '<h1>Senha: </h1><h2>'.$reg->cd_totem.'</h2>';
-       if ($reg->prioridade == 'P') {
+       if ($reg->ds_prioridade == 'P') {
        	echo '<h4> PRIORIDADE </h4>';
        } else {
        	echo '<h4> NORMAL </h4>';

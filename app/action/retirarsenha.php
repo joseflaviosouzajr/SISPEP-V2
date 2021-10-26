@@ -39,8 +39,8 @@ $cadastrar->retirarSenha($prioridade2);
 <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header text-center ">
-        <h5 class="modal-title" id="exampleModalLabel">HOSPITAL JF LTDA</h5>
+      <div class="modal-header text-center bg-success" style="color: white;">
+        <h5 class="modal-title" id="exampleModalLabel">HOSPITAL  DE URGENCIA</h5>
        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span> 
         </button> -->
@@ -72,6 +72,8 @@ $cadastrar->retirarSenha($prioridade2);
    $(document).ready(function() {
 
       $('#modalExemplo').modal('show');
+
+      //window.location.replace('../view/totem/pagina_totem.php');
 
    } );
 

@@ -87,8 +87,15 @@ if (isset($nr_carteira)) {
 			<div  class= "container align-self-center"  style="margin-top: 40px" >
 
 				<div class='text-center'>   <h4>FICHA DE CLASSIFICACAO DA ENFERMAGEM </h4> </div>
-
-				<form action="../../action/cad_pront_enf.php" method="post" style="margin-top: 20px;"> 
+				<?php 
+				if ($atd) {
+					echo '<form action="../../action/cad_pront_enf.php" method="post" style="margin-top: 20px;">';
+				} else {
+					echo '<form action="action/cad_pront_enf.php" method="post" style="margin-top: 20px;">';	
+				}
+				
+				 ?>
+				 
 					<input type="hidden" name="atendimento" <?php if($prontuariopaciente){ echo "value='".$prontuariopaciente->cd_atendimento."' "; } ?> >
 					<div class="form-group">
 						<strong > DADOS DO PACIENTE  </strong> 
@@ -176,8 +183,7 @@ if (isset($nr_carteira)) {
 					<div style="text-align: right;">
 						<button type="submit" class="btn btn-success">Cadastrar</button>
 					</div>
-					<a  href="index.php">  <button type="button" class="btn btn-primary">voltar</button>    </a>
-
+				
 				</form>
 
 			</div>

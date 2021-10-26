@@ -24,6 +24,8 @@ $lab->resultadoPedidoLab();
 
  <script type="text/javascript">
      
+
+    
   window.location.replace('../view/lab/lista_coleta_lab.php');
 
 

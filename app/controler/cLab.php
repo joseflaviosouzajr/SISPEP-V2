@@ -79,7 +79,8 @@ public function listarAtdColeta(){
 
 
  $con = Conexao::getInstance();
- $listaratdcoleta = "SELECT distinct l.cd_lab ,l.resultado, c.cd_atendimento , PA.nome , PA.dt_nascimento , l.coletado FROM classificacao c LEFT JOIN lab l on c.cd_atendimento = l.cd_atendimento left JOIN PACIENTE PA ON c.cd_paciente = PA.cd_paciente WHERE PROTOCOLO = 'COVID-19' and finalizado = 'S'";
+ $listaratdcoleta = "SELECT distinct l.cd_lab ,l.resultado, c.cd_atendimento , PA.nome , PA.dt_nascimento , l.coletado FROM classificacao c LEFT JOIN lab l on c.cd_atendimento = l.cd_atendimento left JOIN PACIENTE PA ON c.cd_paciente = PA.cd_paciente WHERE PROTOCOLO = 'COVID-19' and finalizado = 'S'
+      and  c.cd_atendimento not in (select f.cd_atendimento from ficha_med f where f.finalizado = 'S' ) ";
  $stmt=$con->prepare($listaratdcoleta);
  $result=$stmt->execute();
 

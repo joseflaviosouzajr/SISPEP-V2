@@ -32,7 +32,7 @@ $listaesperamed = new ControlerFichaMed();
     <div class="col-lg-12">
       
       <table class="table">
-        <thead class="thead-dark">
+        <thead class="bg-success" style="color:white;">
           <tr>
              <th class='text-center'>ATENDIMENTO </th>
             <th class='text-center'>PACIENTE </th>
