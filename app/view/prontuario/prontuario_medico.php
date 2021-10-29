@@ -151,7 +151,7 @@ if ($ficha) {
   	url:'action/cadprontmed.php',
   	data:$(this).serialize(),
   	success:function(data){
-  		console.log(data);
+  		$('#conteudo').load('view/totem/lista_espera_med.php');
   	}
   });
   return false;

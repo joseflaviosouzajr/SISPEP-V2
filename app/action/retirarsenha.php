@@ -10,7 +10,7 @@ include "../controler/cTotem.php";
 
 
 $cadastrar = new ControlerTotem();
-$cadastrar->retirarSenha($prioridade2);
+ $res=$cadastrar->retirarSenha($prioridade2);
 //$cadastrar->ultimaSenha();
  //echo $prioridade2;
 
@@ -73,7 +73,12 @@ $cadastrar->retirarSenha($prioridade2);
 
       $('#modalExemplo').modal('show');
 
-      //window.location.replace('../view/totem/pagina_totem.php');
+      setInterval(function(){
+        window.location.replace('../view/totem/pagina_totem.php');
+      },1500);
+
+
+      
 
    } );
 

@@ -78,7 +78,7 @@ $listaesperamed = new ControlerFichaMed();
      const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+       // cancelButton: 'btn btn-danger'
       },
       buttonsStyling: false
     })
@@ -87,7 +87,7 @@ $listaesperamed = new ControlerFichaMed();
       title:  "CHAMANDO PACIENTE:",
       text: paciente+', ATENDIMENTO Nr:' + atd,
   //icon: 'success',
-  showCancelButton: true,
+ // showCancelButton: true,
   confirmButtonText: 'CONFIRMAR CHAMADO',
   cancelButtonText: 'CANCELAR CHAMADO',
   reverseButtons: true

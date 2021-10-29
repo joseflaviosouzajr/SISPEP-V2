@@ -17,6 +17,7 @@ $hasP= (isset($_POST['HAS'])) ? $_POST['HAS'] : 0 ;
 $diabP=(isset($_POST['DIAB'])) ? $_POST['DIAB'] : 0 ;
 $evolucaoP=$_POST['evolucao'];
 $clas_riscoP=$_POST['CLARISCO'];
+$totemP=(isset($_POST['totem'])) ? $_POST['totem'] : 0 ;
 $protocoloP=null;
 $contsepse=0;
 
@@ -82,8 +83,9 @@ if ($atd!='') {
   $documento->editclassificacaoenf();
 }
 else {
-
-    $documento->cadastrarClassficacaoEnf();
+  
+    $documento->setTotem($totemP);
+    $documento->cadastrarClassficacaoEnf();   
 }
 
 

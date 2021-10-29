@@ -75,65 +75,7 @@
 
  <script type="text/javascript">
    
-   $('.fa-volume-up').click(function(e){
 
-   console.log($(this).data('prioridade'));  
-   var nr_senha = $(this).data('nrprioridade');
-   var prioridade = $(this).data('prioridade');
-   var priority = $(this).data('priority');
-
-const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-  },
-  buttonsStyling: false
-})
-
-swalWithBootstrapButtons.fire({
-  title:  "Chamando Senha de Nr:",
-  text: priority,
-  //icon: 'success',
-  showCancelButton: true,
-  confirmButtonText: 'SENHA CONFIRMADA',
-  cancelButtonText: 'CANCELAR CHAMADO',
-  reverseButtons: true
-}).then((result) => {
-  if (result.isConfirmed) {
-    // swalWithBootstrapButtons.fire(
-    //   'Deleted!',
-    //   'Your file has been deleted.',
-    //   'success'
-    // )
-   $.ajax({ 
-             
-       type:'post',
-       url:'action/chamar_paciente.php',
-       data:{
-        nr_senha:nr_senha
-       }  ,
-       success:function(data){
-        window.location.replace('index.php?page=prontenf&nr_senha='+nr_senha);
-       }
-
-
-   })
-
-
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-   
-  ) {
-    swalWithBootstrapButtons.fire(
-      'Cancelled',
-      'Your imaginary file is safe :)',
-      'error'
-    )
-  }
-})
-
-});
 
  </script>
  <script >	

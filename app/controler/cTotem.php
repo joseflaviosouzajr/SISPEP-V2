@@ -17,7 +17,7 @@ public function retirarSenha($prioridade)
 
        if ($result) {
               
-       	echo "suscesso";
+       	return "suscesso";
 
        } else {
        	echo "erro";

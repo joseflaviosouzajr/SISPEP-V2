@@ -112,7 +112,6 @@ $atdlistalab = new  ControlerLab();
   </div>
 
 
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   
   <script type="text/javascript">
 
@@ -130,10 +129,12 @@ $atdlistalab = new  ControlerLab();
 
     $.ajax({
       type:'POST',
-      url:'../../action/cadresultadolab.php',
+      url:'action/cadresultadolab.php',
       data:$(this).serialize(),
       success:function(data){
-        window.location.href='lista_coleta_lab.php';
+         $('#modalExemplo').modal('hide');
+        $("#conteudo").load("view/lab/lista_coleta_lab.php");
+       // window.location.href='view/lab/lista_coleta_lab.php';
        
       }
     });

@@ -61,9 +61,10 @@ public function getDadosPaciente() {
 public function cadastrarClassficacaoEnf(){
  $cd_usuario = $_SESSION['cd_usuario'];
  $con = Conexao::getInstance();
- $query = "insert into classificacao  (  `cd_usuario`, `temp`, `pad`, `pas`, `sat`, `has`, `diabetes`, `ds_evolucao`,  `dt_registro` ,  `cd_totem` ,  `protocolo` ,  `cd_paciente`, `classificacao`  ) values (:cd_usuario , :TEMP ,  :PAD  , :PAS ,  :SAT, :HAS ,  :DIAB, :ds_evolucao ,  NOW() , 11 , :protocolo  , :cd_paciente , :CLARISCO ) ";
+ $query = "insert into classificacao  (  `cd_usuario`, `temp`, `pad`, `pas`, `sat`, `has`, `diabetes`, `ds_evolucao`,  `dt_registro` ,  `cd_totem` ,  `protocolo` ,  `cd_paciente`, `classificacao`  ) values (:cd_usuario , :TEMP ,  :PAD  , :PAS ,  :SAT, :HAS ,  :DIAB, :ds_evolucao ,  NOW() , :totemP , :protocolo  , :cd_paciente , :CLARISCO ) ";
 
  $stmt=$con->prepare( $query );
+ $stmt->bindParam(':totemP', intval($cd_totem));
  $stmt->bindParam(':cd_usuario',$cd_usuario);
  $stmt->bindParam(':TEMP',$this->temp);
   $stmt->bindParam(':PAD',$this->pad);
@@ -72,7 +73,7 @@ public function cadastrarClassficacaoEnf(){
  $stmt->bindParam(':HAS',$this->has);
  $stmt->bindParam(':DIAB',$this->diabetes);
  $stmt->bindParam(':ds_evolucao',$this->evolucao);
- //$stmt->bindParam(':totem',null);
+ $stmt->bindParam(':totemP', $this->totem);
  $stmt->bindParam(':protocolo',$this->protocolo);
   $stmt->bindParam(':cd_paciente',$this->cd_paciente);
  $stmt->bindParam(':CLARISCO',$this->classificacao);
@@ -98,7 +99,12 @@ public function cadastrarClassficacaoEnf(){
 public function listarAtendidoEnf(){
 
   $con = Conexao::getInstance();
-  $lista_atd_enf = "SELECT c.cd_atendimento , pa.nome paciente , pa.dt_nascimento , c.classificacao , CASE WHEN c.classificacao = 'VERMELHO' THEN 1 WHEN c.classificacao = 'AMARELO' THEN 2 WHEN c.classificacao = 'VERDE' THEN 3 WHEN c.classificacao = 'AZUL' THEN 4 END CLALISTA , CASE WHEN c.protocolo = 'COVID-19' THEN 1 WHEN c.protocolo = 'SEPSE' THEN 1 ELSE 2 END CLAPROT , c.protocolo , u.nome usuario , u.nr_conselho , c.dt_registro, c.finalizado FROM usuario u , classificacao c , paciente pa where c.cd_paciente = pa.cd_paciente and c.cd_usuario = u.cd_usuario and u.cd_usuario = 1 ORDER BY CLALISTA , CLAPROT , c.cd_atendimento ";
+  $lista_atd_enf = "SELECT c.cd_atendimento , pa.nome paciente , pa.dt_nascimento , c.classificacao , CASE WHEN c.classificacao = 'VERMELHO' THEN 1 WHEN c.classificacao = 'AMARELO' THEN 2 WHEN c.classificacao = 'VERDE' THEN 3 WHEN c.classificacao = 'AZUL' THEN 4 END CLALISTA , CASE WHEN c.protocolo = 'COVID-19' THEN 1 WHEN c.protocolo = 'SEPSE' THEN 1 ELSE 2 END CLAPROT , c.protocolo , u.nome usuario , u.nr_conselho , c.dt_registro, c.finalizado FROM usuario u , classificacao c , paciente pa where c.cd_paciente = pa.cd_paciente and c.cd_usuario = u.cd_usuario 
+     and u.cd_usuario = 1 
+      and c.cd_atendimento  not in  (select cd_atendimento from ficha_med where finalizado = 'S')
+
+
+  ORDER BY CLALISTA , CLAPROT , c.cd_atendimento ";
 
   $stmt=$con->prepare($lista_atd_enf);
   $result=$stmt->execute();

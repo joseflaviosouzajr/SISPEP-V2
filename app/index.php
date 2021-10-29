@@ -111,7 +111,13 @@ $prioridade=(isset($_GET['nr_senha']))?$_GET['nr_senha']:null;
       } elseif($conselho == 'colab') {
         echo "$('#conteudo').load('view/lab/lista_coleta_lab.php')";
       } elseif($conselho == 'Cremepe') {
-        echo "$('#conteudo').load('view/totem/lista_espera_med.php')";
+        if ($pagina == 'lista_atendido_med') {
+          echo "$('#conteudo').load('view/prontuario/lista_atendido_med.php')";
+        } else {
+          echo "$('#conteudo').load('view/totem/lista_espera_med.php')";
+        }
+        
+        
       } else {
         echo "$('#conteudo').load('')";
       }

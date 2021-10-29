@@ -11,10 +11,10 @@ $ficha= $_GET['cd_ficha'];
 $salvardocmed->salvardocmed($ficha);
 
  ?>
-
+    
  <script type="text/javascript">
  	
- // window.location.replace('../index.php?page=lista_atendido_enf');
+ window.location.replace('../index.php?page=lista_atendido_med');
    
 
  </script>

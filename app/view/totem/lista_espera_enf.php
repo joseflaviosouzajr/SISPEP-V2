@@ -77,7 +77,7 @@ $listaesperaenf = new ControlerTotem();
      const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+        //cancelButton: 'btn btn-danger'
       },
       buttonsStyling: false
     })
@@ -86,9 +86,9 @@ $listaesperaenf = new ControlerTotem();
       title:  "Chamando Senha de Nr:",
       text: priority,
   //icon: 'success',
-  showCancelButton: true,
+  //showCancelButton: true,
   confirmButtonText: 'SENHA CONFIRMADA',
-  cancelButtonText: 'CANCELAR CHAMADO',
+  //cancelButtonText: 'CANCELAR CHAMADO',
   reverseButtons: true
 }).then((result) => {
   if (result.isConfirmed) {
@@ -99,7 +99,7 @@ $listaesperaenf = new ControlerTotem();
     // )
     $.ajax({ 
      
-     type:'post',
+     type:'get',
      url:'action/chamar_paciente.php',
      data:{
       nr_senha:nr_senha
@@ -112,17 +112,19 @@ $listaesperaenf = new ControlerTotem();
   });
 
 
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
+  } 
+
+  // else if (
+  //   /* Read more about handling dismissals below */
+  //   result.dismiss === Swal.DismissReason.cancel
     
-    ) {
-    swalWithBootstrapButtons.fire(
-      'Cancelled',
-      'Your imaginary file is safe :)',
-      'error'
-      )
-  }
+  //   ) {
+  //   swalWithBootstrapButtons.fire(
+  //     'Cancelled',
+  //     'Your imaginary file is safe :)',
+  //     'error'
+  //     )
+  // }
 })
 
 });
