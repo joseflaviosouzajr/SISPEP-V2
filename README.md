@@ -6,10 +6,10 @@
 1. Após a intalção, faça um clone do repósitorio na pasta **htdcos** que pode ser encontrada seguindo: 
    C:/xampp/htdocs/
 1. Após as devidas intalações inicialize o **Apache** e o **MySQL** no painel de controle do XAMPP.
-1. Em seguida acesse o banco de dados pelo link [localhost/phpmyadmin](localhost/phpmyadmin) e importe o arquivo que contem o banco de dados. Criar um novo banco com o hostname sispepv1 e importat os dados.
+1. Em seguida acesse o banco de dados pelo link [localhost/phpmyadmin](127.0.0.1/phpmyadmin) e importe o arquivo que contem o banco de dados. Criar um novo banco com o hostname sispepv1 e importat os dados.
 1. Após finalizar o passo acima, o sistema já estara pronto para acesso. 
-	1. Para acessar a página de login [CLIQUE AQUI](localhost/sispep-v2) ou entre pelo link [localhost/sispep-v2](localhost/sispep-v2).
-	1. Para acessar a página de retirada do totem [CLIQUE AQUI](localhost/sispep-v2/app/view/totem/pagina_totem.php) ou entre pelo link [localhost/sispep-v2/app/view/totem/pagina_totem.php](localhost/sispep-v2/app/view/totem/pagina_totem.php).
+	1. Para acessar a página de login [CLIQUE AQUI](127.0.0.1/sispep-v2) ou entre pelo link [localhost/sispep-v2](127.0.0.1/sispep-v2).
+	1. Para acessar a página de retirada do totem [CLIQUE AQUI](127.0.0.1/sispep-v2/app/view/totem/pagina_totem.php) ou entre pelo link [localhost/sispep-v2/app/view/totem/pagina_totem.php](127.0.0.1/sispep-v2/app/view/totem/pagina_totem.php).
 
 ## Usuários Para Teste
 
