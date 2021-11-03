@@ -3,7 +3,9 @@ header('Content-type: text/html; charset=utf-8');
 setlocale(LC_ALL, NULL); // limpa com defaults do sistema... não precisa.
 // ERRADO, força Windows setlocale(LC_ALL, 'Portuguese_Brazil.1252');
 setlocale(LC_ALL, 'pt_BR.utf-8'); // acho mais correto.
+if(session_id()){
 session_unset(); session_destroy(); 
+} 
 ?>
 <!doctype html>
 <html lang="pt">

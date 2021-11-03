@@ -41,7 +41,7 @@ $listaesperaenf = new ControlerTotem();
             <th class='text-center'>SENHA</th>
             <th class='text-center'>DATA RETIRADA</th>
             <th class='text-center'>CHAMAR</th>
-            <th class='text-center' >EXCLUIR</th>
+            <th class='text-center'>EXCLUIR</th>
           </tr>
         </thead>
         <tbody>
@@ -105,7 +105,7 @@ $listaesperaenf = new ControlerTotem();
       nr_senha:nr_senha
     }  ,
     success:function(data){
-      window.location.replace('index.php?page=prontenf&nr_senha='+nr_senha);
+      $('#conteudo').load('view/prontuario/prontuario.php/?nr_senha='+nr_senha);
     }
 
 

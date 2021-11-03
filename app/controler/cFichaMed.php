@@ -18,6 +18,10 @@ SELECT * from (
     SELECT distinct lp.cd_LAB ,lp.resultado, PO.cd_atendimento , PA.nome , PA.dt_nascimento , po.classificacao ,  po.protocolo ,  CASE WHEN po.classificacao = 'VERMELHO' THEN 1 WHEN po.classificacao = 'AMARELO' THEN 2 WHEN po.classificacao = 'VERDE' THEN 3 WHEN po.classificacao = 'AZUL' THEN 4 END CLALISTA , CASE WHEN po.protocolo = 'COVID-19' THEN 1 WHEN po.protocolo = 'SEPSE' THEN 1 ELSE 2 END CLAPROT  , lp.coletado FROM CLASSIFICACAO PO LEFT JOIN lab lp on po.cd_atendimento = lp.cd_ATENDIMENTO left JOIN PACIENTE PA ON PO.cd_paciente = PA.cd_paciente WHERE po.FINALIZADO = 'S' AND PO.cd_atendimento NOT IN (SELECT CD_ATENDIMENTO FROM ficha_med ) 
    and po.protocolo = 'COVID-19' 
    and lp.resultado is not null
+
+
+   union all 
+    SELECT null cd_LAB , null resultado, PO.cd_atendimento , PA.nome , PA.dt_nascimento , po.classificacao , po.protocolo , CASE WHEN po.classificacao = 'VERMELHO' THEN 1 WHEN po.classificacao = 'AMARELO' THEN 2 WHEN po.classificacao = 'VERDE' THEN 3 WHEN po.classificacao = 'AZUL' THEN 4 END CLALISTA , CASE WHEN po.protocolo = 'COVID-19' THEN 1 WHEN po.protocolo = 'SEPSE' THEN 1 ELSE 2 END CLAPROT , null coletado FROM CLASSIFICACAO PO left JOIN PACIENTE PA ON PO.cd_paciente = PA.cd_paciente WHERE po.FINALIZADO = 'S' AND PO.cd_atendimento NOT IN (SELECT CD_ATENDIMENTO FROM ficha_med )and protocolo is null
     
 ) a
 

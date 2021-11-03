@@ -131,7 +131,7 @@ if ($ficha) {
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <?php  if ($dadoatd->protocolo) { ?> 
+  <?php  if ($dadoatd->protocolo && $ficha == null) { ?> 
 
    
    <script type="text/javascript">
@@ -142,7 +142,13 @@ if ($ficha) {
 
 
   
-  <?php } ?>
+  <?php } elseif ($dadoatd->protocolo && ($ficha != null && $infoficha->aceite_protocolo == 1)) {?>
+  	<script type="text/javascript">
+    var protocolo= "<?php echo $dadoatd->protocolo; ?>";
+    alert("Esse Paciente Possui Protocolo de " + protocolo + "!");
+    
+	 </script>
+ <?php } ?>
 	<script type="text/javascript">
 
   $('#prontmed').submit(function(e){

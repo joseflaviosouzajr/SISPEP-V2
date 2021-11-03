@@ -58,11 +58,8 @@ public function ultimaSenha(){
      
 
        $con = Conexao::getInstance();
-       $query= "select cd_totem , case when ds_prioridade = 'P' then 'PRIORIDADE' ELSE 'NORMAL'  end prioridade  ,   
-
-       case when ds_prioridade = 'P' then '1' ELSE '2'  end prioridadelista  ,
-        dt_registro 
-       from totem where chamado = 'N'  and excluido = 'N' order by prioridadelista  ";
+       $query= "  select cd_totem , case when ds_prioridade = 'P' then 'PRIORIDADE' ELSE 'NORMAL' end prioridade , case when ds_prioridade = 'P' then '1' ELSE '2' end prioridadelista , dt_registro from totem where excluido = 'N' and cd_totem not in (select cd_totem from classificacao )
+       order by prioridadelista  ";
        $stmt=$con->prepare($query);
              $result=$stmt->execute();
 

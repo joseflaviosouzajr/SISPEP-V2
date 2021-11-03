@@ -12,12 +12,14 @@ $carteirapct = new ControlerCarteira();
 $documento=new ControlerDocEnf();
 
 $nr_carteira= (isset($_GET['nr_carteira']))?$_GET['nr_carteira']:null ;
+$nr_senha = (isset($_GET['nr_senha']))?$_GET['nr_senha']:null ;
 
 $atd= (isset($_GET['atd']))?$_GET['atd']:null ;
 $dadospaciente=null;
 $prontuariopaciente=null;
 $seguranca= new Seguranca();
 $seguranca->validaSessao();
+//var_dump($nr_senha);
 
 if (isset($nr_carteira)) {
 
@@ -97,6 +99,8 @@ if (isset($nr_carteira)) {
 				 ?>
 				 
 					<input type="hidden" name="atendimento" <?php if($prontuariopaciente){ echo "value='".$prontuariopaciente->cd_atendimento."' "; } ?> >
+					<div class="form-group">
+					<input type="hidden" name="totem" id="totem" <?php if($nr_senha){ echo "value='".$nr_senha."' "; } ?> >
 					<div class="form-group">
 						<strong > DADOS DO PACIENTE  </strong> 
 					</div>
@@ -196,9 +200,12 @@ if (isset($nr_carteira)) {
 				$('#pesquisar').click(function(e)
 				{
 					var nr_carteira = $('#nr_carteira').val();
+					var senha_totem = $('#totem').val();
 
-					if(nr_carteira != '') {
-						$('#conteudo').load('view/prontuario/prontuario.php?nr_carteira='+nr_carteira); 
+					if(nr_carteira != '' && senha_totem != '') {
+						$('#conteudo').load('view/prontuario/prontuario.php?nr_carteira='+nr_carteira+'&nr_senha='+senha_totem); 
+					} else {
+						$('#conteudo').load('view/prontuario/prontuario.php?nr_carteira='+nr_carteira);
 					}
 				});
 			</script>
